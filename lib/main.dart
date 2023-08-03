@@ -10,6 +10,5 @@ void main() async {
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(documentsDirectory.path);
   Hive.registerAdapter(DadosCadastraisAdapter());
-
   runApp(const MyApp());
 }
