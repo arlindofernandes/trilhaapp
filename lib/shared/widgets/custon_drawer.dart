@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/configura%C3%A7%C3%B5es_page.dart';
+import 'package:trilhaapp/pages/configuracoes/configuracoes_page_hive.dart';
+import 'package:trilhaapp/pages/configuracoes/configuracoes_page_sh.dart';
+import 'package:trilhaapp/pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import 'package:trilhaapp/pages/login_page.dart';
-import 'package:trilhaapp/pages/numeros_aleatorios_page.dart';
+import 'package:trilhaapp/pages/numeros_aleatorios/numerosaleatorios_hive.dart';
+import 'package:trilhaapp/pages/numeros_aleatorios/numeros_aleatorios_sp.dart';
 
-import '../../pages/dados_cadastrais.dart';
+import '../../pages/dados_cadastrais/dados_cadastrais_sh.dart';
 
 class CustonDrawer extends StatelessWidget {
   const CustonDrawer({super.key});
@@ -57,7 +60,7 @@ class CustonDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const DadosCadastraisPage()));
+                      builder: (context) => const DadosCadastraisHivePage()));
             },
             child: Container(
                 padding:
@@ -131,7 +134,7 @@ class CustonDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (bc) => const NumerosAleatoriosPage()));
+                      builder: (bc) => const NumerosAleatoriosHivePage()));
             },
             child: Container(
                 padding:
@@ -154,10 +157,10 @@ class CustonDrawer extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (bc) => const SettingPage()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (bc) => const SettingShPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (bc) => const SettingHivePage()));
             },
             child: Container(
                 padding:

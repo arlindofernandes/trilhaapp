@@ -3,14 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/services/app_storage.dart';
 
-class NumerosAleatoriosPage extends StatefulWidget {
-  const NumerosAleatoriosPage({Key? key}) : super(key: key);
+class NumerosAleatoriosSPPage extends StatefulWidget {
+  const NumerosAleatoriosSPPage({Key? key}) : super(key: key);
 
   @override
-  State<NumerosAleatoriosPage> createState() => _NumerosAleatoriosPageState();
+  State<NumerosAleatoriosSPPage> createState() =>
+      _NumerosAleatoriosSPPageState();
 }
 
-class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
+class _NumerosAleatoriosSPPageState extends State<NumerosAleatoriosSPPage> {
   int numeroGerado = 0;
   int quantidadeCliques = 0;
   AppStorageServices storage = AppStorageServices();

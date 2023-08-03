@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilhaapp/model/configuracoes_model.dart';
+import 'package:trilhaapp/repository/configuracoes_repository.dart';
 import 'package:trilhaapp/services/app_storage.dart';
 
-class SettingPage extends StatefulWidget {
-  const SettingPage({super.key});
+class SettingHivePage extends StatefulWidget {
+  const SettingHivePage({super.key});
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
+  State<SettingHivePage> createState() => _SettingHivePageState();
 }
 
-class _SettingPageState extends State<SettingPage> {
-  AppStorageServices storage = AppStorageServices();
+class _SettingHivePageState extends State<SettingHivePage> {
+  late ConfiguracoesRepository configuracoesRepository;
+  var configuracoesModel = ConfiguracoesModel.vazio();
   TextEditingController nomeUsuarioController = TextEditingController();
   TextEditingController alturaController = TextEditingController();
-  String? nomeUsuario;
-  double? altura;
-  bool receberpushnotification = false;
-  bool temaEscuro = false;
 
   @override
   void initState() {
@@ -25,10 +23,11 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   carregarDados() async {
-    nomeUsuarioController.text = await storage.getUsario();
-    alturaController.text = (await storage.getAltura()).toString();
-    receberpushnotification = await storage.getNotificacoes();
-    temaEscuro = await storage.getTema();
+    configuracoesRepository = await ConfiguracoesRepository.load();
+    configuracoesModel = configuracoesRepository.obterDados();
+
+    nomeUsuarioController.text = configuracoesModel.nomeUsuario;
+    alturaController.text = configuracoesModel.altura.toString();
     setState(() {});
   }
 
@@ -37,7 +36,7 @@ class _SettingPageState extends State<SettingPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: const Text("Configurações"),
+        title: const Text("Configurações Hive"),
       ),
       body: Container(
         child: ListView(
@@ -59,19 +58,20 @@ class _SettingPageState extends State<SettingPage> {
             ),
             SwitchListTile(
               title: const Text("Receber Notificações"),
-              value: receberpushnotification,
+              value: configuracoesModel.receberpushnotification,
               onChanged: (bool value) {
                 setState(() {
-                  receberpushnotification = !receberpushnotification;
+                  configuracoesModel.receberpushnotification =
+                      !configuracoesModel.receberpushnotification;
                 });
               },
             ),
             SwitchListTile(
               title: const Text("Tema Escuro"),
-              value: temaEscuro,
+              value: configuracoesModel.temaEscuro,
               onChanged: (bool value) {
                 setState(() {
-                  temaEscuro = value;
+                  configuracoesModel.temaEscuro = value;
                 });
               },
             ),
@@ -80,8 +80,8 @@ class _SettingPageState extends State<SettingPage> {
               onPressed: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
                 try {
-                  await storage
-                      .setAltura(double.tryParse(alturaController.text) ?? 0);
+                  configuracoesModel.altura =
+                      (double.tryParse(alturaController.text) ?? 0);
                 } catch (e) {
                   showDialog(
                       context: context,
@@ -101,9 +101,8 @@ class _SettingPageState extends State<SettingPage> {
                       });
                   return;
                 }
-                await storage.setUsuario(nomeUsuarioController.text);
-                await storage.setNotificacoes(receberpushnotification);
-                await storage.setTema(temaEscuro);
+                configuracoesModel.nomeUsuario = nomeUsuarioController.text;
+                configuracoesRepository.salvar(configuracoesModel);
                 Navigator.pop(context);
               },
             )

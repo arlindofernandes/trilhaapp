@@ -3,7 +3,7 @@ import 'package:trilhaapp/pages/card_page.dart';
 import 'package:trilhaapp/pages/image_assets.dart';
 import 'package:trilhaapp/pages/list_view.dart';
 import 'package:trilhaapp/pages/list_view_h.dart';
-import 'package:trilhaapp/pages/tarefa_page.dart';
+import 'package:trilhaapp/pages/tarefas/tarefa_hive_page.dart';
 import 'package:trilhaapp/shared/widgets/custon_drawer.dart';
 
 class Homepage extends StatefulWidget {

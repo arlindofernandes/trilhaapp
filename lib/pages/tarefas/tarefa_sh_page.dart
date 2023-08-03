@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/model/tarefa.dart';
 import 'package:trilhaapp/repository/tarefa_repository.dart';
 
-class TarefaPage extends StatefulWidget {
-  const TarefaPage({super.key});
+class TarefaShPage extends StatefulWidget {
+  const TarefaShPage({super.key});
 
   @override
-  State<TarefaPage> createState() => _TarefaPageState();
+  State<TarefaShPage> createState() => _TarefaShPageState();
 }
 
-class _TarefaPageState extends State<TarefaPage> {
+class _TarefaShPageState extends State<TarefaShPage> {
   var tarefaRepository = TarefaRepository();
   var _tarefas = const <Tarefa>[];
   var descricaoContoller = TextEditingController();
