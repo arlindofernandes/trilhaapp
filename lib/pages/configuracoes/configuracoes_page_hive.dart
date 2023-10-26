@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/model/configuracoes_model.dart';
 import 'package:trilhaapp/repository/configuracoes_repository.dart';
-import 'package:trilhaapp/services/app_storage.dart';
 
 class SettingHivePage extends StatefulWidget {
   const SettingHivePage({super.key});

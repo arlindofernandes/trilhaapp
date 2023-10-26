@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/configuracoes/configuracoes_page_hive.dart';
-import 'package:trilhaapp/pages/configuracoes/configuracoes_page_sh.dart';
 import 'package:trilhaapp/pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/numeros_aleatorios/numerosaleatorios_hive.dart';
-import 'package:trilhaapp/pages/numeros_aleatorios/numeros_aleatorios_sp.dart';
-
-import '../../pages/dados_cadastrais/dados_cadastrais_sh.dart';
+import 'package:trilhaapp/pages/posts_page.dart';
 
 class CustonDrawer extends StatelessWidget {
-  const CustonDrawer({super.key});
+  const CustonDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
             onTap: () {
@@ -31,14 +27,14 @@ class CustonDrawer extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           title: const Text("Camera"),
-                          leading: const Icon(Icons.camera),
+                          leading: const Icon(Icons.camera_alt),
                         ),
                         ListTile(
                           onTap: () {
                             Navigator.pop(context);
                           },
                           title: const Text("Galeria"),
-                          leading: const Icon(Icons.album),
+                          leading: const Icon(Icons.insert_photo),
                         )
                       ],
                     );
@@ -51,10 +47,23 @@ class CustonDrawer extends StatelessWidget {
                   child: Image.network(
                       "https://hermes.digitalinnovation.one/assets/diome/logo.png"),
                 ),
-                accountName: const Text("Arlindo"),
+                accountName: const Text("Danilo Perez"),
                 accountEmail: const Text("email@email.com")),
           ),
           InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.person),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("Dados cadastráis"),
+                  ],
+                )),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -62,60 +71,18 @@ class CustonDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const DadosCadastraisHivePage()));
             },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: double.infinity,
-                child: Row(
-                  children: const [
-                    Icon(Icons.person),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text("Dados cadastrais"),
-                  ],
-                )),
           ),
           const Divider(),
           const SizedBox(
             height: 10,
           ),
           InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  context: context,
-                  builder: ((BuildContext bc) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 16),
-                      child: Column(
-                        children: const [
-                          Text(
-                            "Termos de uso e privacidade",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "O uso deste serviço está sujeito à aceitação dos seguintes termos. Ao acessar ou utilizar este serviço, você concorda em cumprir e estar vinculado a estes termos. O serviço destina-se a fins legítimos e seu uso deve estar em conformidade com as leis e regulamentos aplicáveis. A propriedade intelectual do serviço e de seu conteúdo é exclusiva do titular do serviço e protegida por leis de direitos autorais. A privacidade dos usuários é respeitada, e as informações pessoais serão tratadas de acordo com a política de privacidade. O serviço é fornecido \"no estado em que se encontra\", sem garantias de qualquer tipo. O titular do serviço não assume responsabilidade por danos decorrentes do uso ou incapacidade de uso do serviço. Estes termos estão sujeitos a alterações, e é responsabilidade do usuário revisá-los periodicamente.",
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    );
-                  }));
-            },
             child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 width: double.infinity,
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     Icon(Icons.info),
                     SizedBox(
                       width: 5,
@@ -123,12 +90,54 @@ class CustonDrawer extends StatelessWidget {
                     Text("Termos de uso e privacidade"),
                   ],
                 )),
+            onTap: () {
+              showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  context: context,
+                  builder: (BuildContext bc) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
+                      child: const Column(
+                        children: [
+                          Text(
+                            "Termos de uso e privacidade",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Do mesmo modo, o entendimento das metas propostas prepara-nos para enfrentar situações atípicas decorrentes do sistema de formação de quadros que corresponde às necessidades. Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a consolidação das estruturas acarreta um processo de reformulação e modernização dos conhecimentos estratégicos para atingir a excelência. Assim mesmo, a revolução dos costumes deve passar por modificações independentemente dos índices pretendidos. Não obstante, a percepção das dificuldades apresenta tendências no sentido de aprovar a manutenção do retorno esperado a longo prazo.",
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
           ),
           const Divider(),
           const SizedBox(
             height: 10,
           ),
           InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.numbers),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("Gerador de números"),
+                  ],
+                )),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -136,51 +145,123 @@ class CustonDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (bc) => const NumerosAleatoriosHivePage()));
             },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: double.infinity,
-                child: Row(
-                  children: const [
-                    Icon(Icons.numbers),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text("Gerador de numeros"),
-                  ],
-                )),
           ),
           const Divider(),
           const SizedBox(
             height: 10,
           ),
+          // InkWell(
+          //   child: Container(
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //       width: double.infinity,
+          //       child: Row(
+          //         children: const [
+          //           Icon(Icons.album),
+          //           SizedBox(
+          //             width: 5,
+          //           ),
+          //           Text("Configurações"),
+          //         ],
+          //       )),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (bc) => const ConfiguracoesHivePage()));
+          //   },
+          // ),
+          const Divider(),
+          const SizedBox(
+            height: 10,
+          ),
           InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.post_add),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("Posts"),
+                  ],
+                )),
             onTap: () {
               Navigator.pop(context);
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (bc) => const SettingShPage()));
               Navigator.push(context,
-                  MaterialPageRoute(builder: (bc) => const SettingHivePage()));
+                  MaterialPageRoute(builder: (bc) => const PostsPage()));
             },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: double.infinity,
-                child: Row(
-                  children: const [
-                    Icon(Icons.settings),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text("configuraçoes"),
-                  ],
-                )),
           ),
           const Divider(),
           const SizedBox(
             height: 10,
           ),
+          // InkWell(
+          //   child: Container(
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //       width: double.infinity,
+          //       child: Row(
+          //         children: const [
+          //           Icon(Icons.help),
+          //           SizedBox(
+          //             width: 5,
+          //           ),
+          //           Text("Herois"),
+          //         ],
+          //       )),
+          //   onTap: () async {
+          //     Navigator.pop(context);
+          //     Navigator.push(context,
+          //         MaterialPageRoute(builder: (bc) => const CharactersPage()));
+          //   },
+          // ),
+          // const Divider(),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // InkWell(
+          //   child: Container(
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //       width: double.infinity,
+          //       child: Row(
+          //         children: const [
+          //           Icon(Icons.help),
+          //           SizedBox(
+          //             width: 5,
+          //           ),
+          //           Text("Tarefas HTTP"),
+          //         ],
+          //       )),
+          //   onTap: () async {
+          //     Navigator.pop(context);
+          //     Navigator.push(context,
+          //         MaterialPageRoute(builder: (bc) => const TarefaHttpPage()));
+          //   },
+          // ),
+          // const Divider(),
+          // const SizedBox(
+          //   height: 10,
+          // ),
           InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.exit_to_app),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("Sair"),
+                  ],
+                )),
             onTap: () {
               showDialog(
                   context: context,
@@ -194,8 +275,9 @@ class CustonDrawer extends StatelessWidget {
                         "Meu App",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      content: Wrap(
-                        children: const [
+                      content: const Wrap(
+                        children: [
+                          Text("Voce sairá do aplicativo!"),
                           Text("Deseja realmente sair do aplicativo?"),
                         ],
                       ),
@@ -217,19 +299,6 @@ class CustonDrawer extends StatelessWidget {
                     );
                   });
             },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: double.infinity,
-                child: Row(
-                  children: const [
-                    Icon(Icons.exit_to_app),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text("Sair"),
-                  ],
-                )),
           ),
         ],
       ),

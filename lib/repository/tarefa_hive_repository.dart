@@ -15,16 +15,16 @@ class TarefaHRepository {
     return TarefaHRepository._criar();
   }
 
-  salvar(TarefasModel TarefasModel) {
-    _box.add(TarefasModel);
+  salvar(TarefasModel tarefasModel) {
+    _box.add(tarefasModel);
   }
 
-  alterar(TarefasModel TarefasModel) {
-    TarefasModel.save();
+  alterar(TarefasModel tarefasModel) {
+    tarefasModel.save();
   }
 
-  excluir(TarefasModel TarefasModel) {
-    TarefasModel.delete();
+  excluir(TarefasModel tarefasModel) {
+    tarefasModel.delete();
   }
 
   List<TarefasModel> obterDados(bool naoConcluido) {

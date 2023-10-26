@@ -46,15 +46,11 @@ class _NumerosAleatoriosHivePageState extends State<NumerosAleatoriosHivePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                numeroGerado == null
-                    ? "Nenhum número gerado"
-                    : numeroGerado.toString(),
+                numeroGerado.toString(),
                 style: const TextStyle(fontSize: 22),
               ),
               Text(
-                quantidadeCliques == null
-                    ? "Nenhum clique efetuado"
-                    : quantidadeCliques.toString(),
+                quantidadeCliques.toString(),
                 style: const TextStyle(fontSize: 22),
               )
             ],
